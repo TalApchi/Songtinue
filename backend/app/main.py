@@ -1,6 +1,7 @@
 from fastapi import FastAPI
-from app.schemas.song_idea import SongIdeaRequest, SongIdeaResponse
+from app.schemas.layer_request import LayerGenerationRequest
 from app.services.chord_parser import parse_chord_progression
+from app.services.rhythm_grid import get_steps_per_bar
 
 app = FastAPI()
 
@@ -8,13 +9,17 @@ app = FastAPI()
 def health():
     return {"status": "ok"}
 
-@app.post("/song-ideas/validate")
-def validate_song_idea(song_idea: SongIdeaRequest) -> SongIdeaResponse:
-    parsed_bars = parse_chord_progression(song_idea.chord_progression)
+@app.post("/layers/generate")
+def generate_layer(request: LayerGenerationRequest):
     
-    return SongIdeaResponse(
-        bars = parsed_bars,
-        root_note = song_idea.root_note,
-        scale_type = song_idea.scale_type,
-        bpm = song_idea.bpm,
-    )
+    parsed_bars = parse_chord_progression(request.song_idea.chord_progression)
+
+    steps_per_bar = get_steps_per_bar(request.resolution)
+    total_steps = len(parsed_bars) * steps_per_bar
+
+    return {
+        "bars": parsed_bars,
+        "steps_per_bar": steps_per_bar,
+        "total_steps": total_steps,
+    }
+    
