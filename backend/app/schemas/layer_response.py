@@ -5,5 +5,5 @@ class GeneratedNote(BaseModel):
     step: int
     duration: int
 
-class LayerGenerationResponse(BaseModle):
+class LayerGenerationResponse(BaseModel):
     notes: list[GeneratedNote]
