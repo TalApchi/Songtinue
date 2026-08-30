@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import PianoRoll from './components/PianoRoll'
 
 
 function App() {
@@ -8,6 +9,11 @@ function App() {
   const [rootNote, setRootNote] = useState('C')
   const [scaleType, setScaleType] = useState('major')
   const [bpm, setBpm] = useState('120')
+  const [isPianoRollOpen, setIsPianoRollOpen] = useState(false)
+  
+  if (isPianoRollOpen) {
+    return <PianoRoll />
+  }
 
   return (
     <main className="app">
@@ -78,7 +84,10 @@ function App() {
                 />
               </label>
             </div>
-            <button type="button" className="continueButton">
+            <button 
+              type="button" 
+              className="continueButton"
+              onClick={() => setIsPianoRollOpen(true)}>
               Continue
               <span aria-hidden="true">→</span>
             </button>
