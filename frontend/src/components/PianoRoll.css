@@ -1,6 +1,7 @@
 .pianoRoll {
     min-height: 100vh;
     padding: 40px;
+    box-sizing: border-box;
     color: #f5f2ed;
     background-image:
         linear-gradient(rgba(5, 4, 3, 0.76), rgba(5, 4, 3, 0.86)),
@@ -12,20 +13,117 @@
     overflow: auto;
 }
 
-.pianoGrid {
-    width: min(1100px, 100%);
-    margin: 28px auto 0;
+.layerControls {
+    width: min(950px, 100%);
+    margin: 24px auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 140px auto;
+    gap: 16px;
+    padding: 18px;
+    box-sizing: border-box;
+    background: rgba(18, 16, 14, 0.92);
+    border: 1px solid rgba(214, 155, 93, 0.32);
+    border-radius: 14px;
+    align-items: end;
+}
+
+.layerField {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 8px;
+}
+
+.layerField:first-child {
+    width: 100%;
+    min-width: 0;
+}
+
+.layerField span {
+    color: #cfc7be;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.layerField textarea,
+.layerField select {
+    width: 100%;
+    box-sizing: border-box;
+    color: #f5f2ed;
+    background-color: #211e1b;
+    border: 1px solid #494139;
+    border-radius: 8px;
+    outline: none;
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 13px;
+}
+
+.layerField textarea {
+    display: block;
+    width: 100%;
+    min-width: 100%;
+    min-height: 68px;
+    padding: 12px;
+    resize: vertical;
+}
+
+.layerField select {
+    height: 44px;
+    padding: 0 10px;
+}
+
+.layerField textarea:focus,
+.layerField select:focus {
+    border-color: #d69b5d;
+    box-shadow: 0 0 0 3px rgba(214, 155, 93, 0.13);
+}
+
+.pianoScroll {
+    width: min(1100px, 100%);
+    margin: 28px auto 0;
     padding: 20px;
+    box-sizing: border-box;
+    overflow-x: auto;
+    overflow-y: hidden;
     background: rgba(14, 13, 12, 0.94);
     border: 1px solid rgba(214, 155, 93, 0.32);
     border-radius: 18px;
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
     backdrop-filter: blur(10px);
-    overflow-x: auto;
-    overflow-y: hidden;
+}
+
+.chordTimeline {
+    display: flex;
+    width: max-content;
+    min-width: max-content;
+    margin-left: 49px;
+    margin-bottom: 4px;
+}
+
+.chordBar {
+    display: flex;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    background: rgba(24, 22, 20, 0.94);
+    border-right: 2px solid rgba(211, 139, 58, 0.45);
+}
+
+.chordLabel {
+    flex: 1;
+    box-sizing: border-box;
+    padding: 8px 0;
+    text-align: center;
+    color: #e6a15b;
+    border-left: 1px solid rgba(211, 139, 58, 0.25);
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.pianoGrid {
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    min-width: max-content;
+    gap: 4px;
 }
 
 .pianoRow {
@@ -35,26 +133,27 @@
 }
 
 .pianoKey {
+    position: sticky;
+    left: 0;
+    z-index: 2;
     width: 45px;
     min-width: 45px;
     height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
     color: #d8d1c8;
     background-color: #211e1b;
     border: 1px solid #3a342e;
     border-radius: 4px;
     font-size: 12px;
-    position: sticky;
-    left: 30;
-    z-index: 2;
 }
 
 .noteLane {
+    position: relative;
     flex-shrink: 0;
     height: 36px;
-    position: relative;
     background-color: rgba(24, 22, 20, 0.94);
     background-image:
         repeating-linear-gradient(
@@ -74,8 +173,35 @@
     position: absolute;
     top: 5px;
     height: 26px;
+    box-sizing: border-box;
     background: linear-gradient(135deg, #e2ad72, #bc7742);
     border: 1px solid #f0c18c;
     border-radius: 5px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.generateButton {
+    height: 44px;
+    padding: 0 20px;
+    color: #17120e;
+    background: linear-gradient(135deg, #f0c18c, #d69b5d);
+    border: 1px solid #f4cca0;
+    border-radius: 8px;
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.generateButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(214, 155, 93, 0.28);
+}
+
+.generateButton:active {
+    transform: translateY(0);
 }

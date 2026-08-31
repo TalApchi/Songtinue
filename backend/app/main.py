@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 import os
-
+from fastapi.middleware.cors import CORSMiddleware
 from app.schemas.layer_response import LayerGenerationResponse
 from app.services.openrouter_client import generate_layer_with_ai
 from dotenv import load_dotenv
@@ -11,6 +11,12 @@ from app.services.rhythm_grid import get_steps_per_bar
 load_dotenv()
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_methods=["POST"],
+    allow_headers=["Content-Type"],
+)
 
 @app.get("/health")
 def health():
