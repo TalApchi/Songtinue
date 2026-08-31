@@ -12,7 +12,12 @@ function App() {
   const [isPianoRollOpen, setIsPianoRollOpen] = useState(false)
   
   if (isPianoRollOpen) {
-    return <PianoRoll />
+    return <PianoRoll 
+      chordProgression={chords}
+      rootNote={rootNote}
+      scaleType={scaleType}
+      bpm={bpm}
+     />
   }
 
   return (
