@@ -43,6 +43,7 @@ def generate_layer_with_ai(
     If the layer instruction requests a note on every step,
     return exactly {total_steps} notes with steps from 0 through {total_steps - 1}
     and duration 1 for every note.
+    Every pitch must be between C3 and B6.
 
     Return notes with:
     - pitch
