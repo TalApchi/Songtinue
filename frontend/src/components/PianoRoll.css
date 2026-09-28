@@ -264,3 +264,47 @@
     cursor: wait;
     transform: none;
 }
+
+.playButton,
+.stopButton {
+    height: 42px;
+    padding: 0 18px;
+    border-radius: 8px;
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.playButton {
+    color: #17120e;
+    background: linear-gradient(135deg, #f0c18c, #d69b5d);
+    border: 1px solid #f4cca0;
+}
+
+.playButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(214, 155, 93, 0.28);
+}
+
+.stopButton {
+    color: #e2ad72;
+    background: rgba(33, 30, 27, 0.94);
+    border: 1px solid rgba(214, 155, 93, 0.55);
+}
+
+.stopButton:hover {
+    background: #302a25;
+    border-color: #e2ad72;
+    transform: translateY(-2px);
+}
+
+.playButton:active,
+.stopButton:active {
+    transform: translateY(0);
+}

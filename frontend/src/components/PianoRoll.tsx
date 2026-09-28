@@ -1,5 +1,9 @@
 import { useState } from 'react'
 import './PianoRoll.css'
+import {
+    playNotes,
+    stopPlayback
+} from '../services/audioPlayer'
 
 const pitchClasses = [
     'C',
@@ -120,6 +124,19 @@ function PianoRoll(props: PianoRollProps) {
         }
     }
 
+    async function handlePlay() {
+
+        try {
+            await playNotes(notes, bpm, resolution)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    function handleStop() {
+        stopPlayback()
+    }
+
     return (
         <section className="pianoRoll">
             <h2>Piano Roll</h2>
@@ -218,19 +235,34 @@ function PianoRoll(props: PianoRollProps) {
                 </div>
             </div>
 
-            {notes.length > 0 && (
-                <div className="layerActions">
-                    <button
-                        type="button"
-                        className="tryAgainButton"
-                        onClick={handleGenerateLayer}
-                        disabled={isGenerating}
-                    >
-                        {isGenerating ? 'Generating...' : 'Try Again'}
-                    </button>
-                </div>
-            )}
+    {notes.length > 0 && (
+        <div className="layerActions">
+            <button
+                type="button"
+                className="playButton"
+                onClick={handlePlay}
+            >
+                Play
+            </button>
 
+            <button
+                type="button"
+                className="stopButton"
+                onClick={handleStop}
+            >
+                Stop
+            </button>
+
+            <button
+                type="button"
+                className="tryAgainButton"
+                onClick={handleGenerateLayer}
+                disabled={isGenerating}
+            >
+                {isGenerating ? 'Generating...' : 'Try Again'}
+            </button>
+        </div>
+    )}
         </section>
     )
 }
