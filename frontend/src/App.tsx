@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import PianoRoll from './components/PianoRoll'
+import musicCoreImg from './assets/ui/music-core.png'
 
 
 function App() {
@@ -24,8 +25,18 @@ function App() {
     <main className="app">
       <section className="intro">
         <p className="eyebrow">AI MUSIC COPILOT</p>
-        <h1>Turn your idea into music.</h1>
+        <h1>
+          <span>TURN YOUR IDEA</span>
+          <strong>INTO MUSIC.</strong>
+        </h1>
+        <img
+          src={musicCoreImg}
+          className="musicCore"
+          alt=""
+        />
       </section>
+
+
 
       <section className="songCard">
         <button

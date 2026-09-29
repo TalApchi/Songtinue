@@ -139,8 +139,38 @@ function PianoRoll(props: PianoRollProps) {
 
     return (
         <section className="pianoRoll">
-            <h2>Piano Roll</h2>
+            <header className="pianoHeader">
+                <div className="pianoBrand">
+                    <div className="pianoBrandIcon" aria-hidden="true">
+                        ♪
+                    </div>
 
+                    <div>
+                        <strong>SONGTINUE</strong>
+                        <span>AI MUSIC COPILOT</span>
+                    </div>
+                </div>
+
+                <div className="pianoTitle">
+                    <span>PIANO ROLL</span>
+                    <small>GENERATIVE WORKSPACE</small>
+                </div>
+
+                <div className="songInformation">
+                    <div>
+                        <small>KEY</small>
+                        <strong>
+                            {rootNote} {scaleType}
+                        </strong>
+                    </div>
+
+                    <div>
+                        <small>TEMPO</small>
+                        <strong>{bpm} BPM</strong>
+                    </div>
+                </div>
+            </header>
+            
             <div className="layerControls">
                 <label className="layerField">
                     <span>What should the AI create?</span>
@@ -175,8 +205,14 @@ function PianoRoll(props: PianoRollProps) {
                     className="generateButton"
                     disabled={isGenerating}
                     >
-                        {isGenerating? 'Generating...' : 'Generate Layer'}
-                    </button>
+                        <span className="controlIcon" aria-hidden="true">
+                            ✦
+                        </span>
+
+                        <span>
+                            {isGenerating ? 'Generating...' : 'Generate Layer'}
+                        </span>
+                </button>
 
 
             </div>
@@ -187,51 +223,53 @@ function PianoRoll(props: PianoRollProps) {
                 </p>
             )}
 
-            <div className="pianoScroll">
-                <div className="chordTimeline">
-                    {chordsByBar.map((chords, barIndex) => (
-                        <div
-                            className="chordBar"
-                            key={barIndex}
-                            style={{ width: `${barWidth}px` }}
-                        >
-                            {chords.map((chord, chordIndex) => (
-                                <div
-                                    className="chordLabel"
-                                    key={`${barIndex}-${chordIndex}`}
-                                >
-                                    {chord}
-                                </div>
-                            ))}
-                        </div>
-                    ))}
-                </div>
-
-                <div className="pianoGrid">
-                    {pitches.map((pitch) => (
-                        <div className="pianoRow" key={pitch}>
-                            <div className="pianoKey">
-                                {pitch}
-                            </div>
-
+            <div className="pianoFrame">
+                <div className="pianoScroll">
+                    <div className="chordTimeline">
+                        {chordsByBar.map((chords, barIndex) => (
                             <div
-                                className="noteLane"
-                                style={{ width: `${gridWidth}px` }}
+                                className="chordBar"
+                                key={barIndex}
+                                style={{ width: `${barWidth}px` }}
                             >
-                                {notes
-                                    .filter((note) => note.pitch === pitch)
-                                    .map((note) => (
-                                        <div
-                                            className="pianoNote"
-                                            key={`${note.pitch}-${note.step}`}
-                                            style={{
-                                            left: `${note.step * resolutionMultiplier * stepWidth}px`,
-                                            width: `${note.duration * resolutionMultiplier * stepWidth}px`                                            }}
-                                        ></div>
-                                    ))}
+                                {chords.map((chord, chordIndex) => (
+                                    <div
+                                        className="chordLabel"
+                                        key={`${barIndex}-${chordIndex}`}
+                                    >
+                                        {chord}
+                                    </div>
+                                ))}
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
+
+                    <div className="pianoGrid">
+                        {pitches.map((pitch) => (
+                            <div className="pianoRow" key={pitch}>
+                                <div className="pianoKey">
+                                    {pitch}
+                                </div>
+
+                                <div
+                                    className="noteLane"
+                                    style={{ width: `${gridWidth}px` }}
+                                >
+                                    {notes
+                                        .filter((note) => note.pitch === pitch)
+                                        .map((note) => (
+                                            <div
+                                                className="pianoNote"
+                                                key={`${note.pitch}-${note.step}`}
+                                                style={{
+                                                left: `${note.step * resolutionMultiplier * stepWidth}px`,
+                                                width: `${note.duration * resolutionMultiplier * stepWidth}px`                                            }}
+                                            ></div>
+                                        ))}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
 
@@ -242,7 +280,11 @@ function PianoRoll(props: PianoRollProps) {
                 className="playButton"
                 onClick={handlePlay}
             >
-                Play
+                <span className="controlIcon" aria-hidden="true">
+                    ▶
+                </span>
+
+                <span>Play</span>            
             </button>
 
             <button
@@ -250,7 +292,11 @@ function PianoRoll(props: PianoRollProps) {
                 className="stopButton"
                 onClick={handleStop}
             >
-                Stop
+                <span className="controlIcon" aria-hidden="true">
+                    ■
+                </span>
+
+                <span>Stop</span>
             </button>
 
             <button
@@ -259,7 +305,13 @@ function PianoRoll(props: PianoRollProps) {
                 onClick={handleGenerateLayer}
                 disabled={isGenerating}
             >
-                {isGenerating ? 'Generating...' : 'Try Again'}
+                <span className="controlIcon" aria-hidden="true">
+                    ↻
+                </span>
+
+                <span>
+                    {isGenerating ? 'Generating...' : 'Try Again'}
+                </span>
             </button>
         </div>
     )}
