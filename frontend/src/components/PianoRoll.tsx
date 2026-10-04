@@ -56,6 +56,7 @@ function PianoRoll(props: PianoRollProps) {
     const [notes, setNotes] = useState<PianoNote[]>([])
     const [isGenerating, setIsGenerating] = useState(false)
     const [generationError, setGenerationError] = useState('')
+    const apiUrl = import.meta.env.VITE_API_URL ?? 'http://127.0.0.1:8000'
 
     const chordProgression = props.chordProgression
     const rootNote= props.rootNote
@@ -95,8 +96,7 @@ function PianoRoll(props: PianoRollProps) {
             }
 
             const response = await fetch(
-                'http://127.0.0.1:8000/layers/generate',
-                {
+                    `${apiUrl}/layers/generate`,                {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -106,7 +106,6 @@ function PianoRoll(props: PianoRollProps) {
             )
 
             const data = await response.json()
-            console.log(data)
             
             if (!response.ok) {
                 throw new Error('Layer generation failed')
