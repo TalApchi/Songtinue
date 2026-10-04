@@ -1,56 +1,43 @@
-# \# Songtinue
+# Songtinue
 
-# 
+An AI-powered music layer generator with a Piano Roll editor.
 
-# An AI-powered music layer generator with a Piano Roll editor.
+## Screenshots
 
-# 
+### Main screen
+![Songtinue main screen](./main-screen.png)
 
-# \## Backend setup
+### Application preview
+![Songtinue preview 1](./1.png)
 
-# 
+![Songtinue preview 2](./2.png)
 
-# The backend is built with Python and FastAPI.
+## Backend setup
 
-# 
+The backend is built with Python and FastAPI.
 
-# \### Run the backend
+### Run the backend
 
-# 
+From the `backend` directory, activate the virtual environment:
 
-# From the `backend` directory:
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
 
-# 
+Install the dependencies and start the server:
 
-# ```powershell
+```powershell
+python -m pip install -r requirements.txt
+python -m uvicorn app.main:app --reload
+```
 
-# .\\.venv\\Scripts\\Activate.ps1
+### API documentation
 
-# python -m pip install -r requirements.txt
+When the server is running, open:
 
-# python -m uvicorn app.main:app --reload
+http://127.0.0.1:8000/docs
 
-# ```
+### Current endpoints
 
-# 
-
-# \### API documentation
-
-# 
-
-# When the server is running, open:
-
-# 
-
-# http://127.0.0.1:8000/docs
-
-# 
-
-# \### Current endpoints
-
-# 
-
-# \- `GET /health` checks whether the backend is running.
-
-# \- `POST /song-ideas/validate` validates a song idea and parses its chord progression into bars.
-
+- `GET /health` — Checks whether the backend is running.
+- `POST /song-ideas/validate` — Validates a song idea and parses its chord progression into bars.
