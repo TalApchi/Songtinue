@@ -1,4 +1,4 @@
-﻿# Songtinue
+# Songtinue
 
 An AI-powered music layer generator with a Piano Roll editor.
 
@@ -27,6 +27,8 @@ python -m uvicorn app.main:app --reload
 ```
 
 ### API documentation
+
+When the server is running, open:
 
 http://127.0.0.1:8000/docs
 
