@@ -11,9 +11,13 @@ from app.services.rhythm_grid import get_steps_per_bar
 load_dotenv()
 
 app = FastAPI()
+
+frontend_url = os.getenv("FRONTEND_URL", "http://localhost:5173")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=[frontend_url],
+    allow_origin_regex=r"http://(localhost|127\.0\.0\.1):\d+",
     allow_methods=["POST"],
     allow_headers=["Content-Type"],
 )
